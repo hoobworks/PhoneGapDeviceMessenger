@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.hoobworks.DeviceMessenger"
+    version="0.1">
+
+    <name>DeviceMessenger</name>
+  <author>Holger Berg</author>
+
+  <description>
+    jaja
+  </description>
+
+  <license>MIT</license>
+
+  <js-module src="www/device_messenger.js" name="DeviceMessenger">
+      <clobbers target="DeviceMessenger" />
+  </js-module>
+
+  <engines>
+      <engine name="cordova" version="&gt;=3.0.0" />
+  </engines>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+          <feature name="DeviceMessenger">
+            <param name="ios-package" value="DeviceMessenger"/>
+          </feature>
+        </config-file>
+
+        <source-file src="src/ios/DeviceMessenger.m" />
+        <source-file src="src/ios/DeviceMessenger.h" />
+
+    </platform>
+</plugin>
