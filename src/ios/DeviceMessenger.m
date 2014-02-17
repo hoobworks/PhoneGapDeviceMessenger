@@ -13,20 +13,21 @@
 
 @implementation DeviceMessenger
 
-- (void)showPdf:(CDVInvokedUrlCommand*)command
+- (void)openFile:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
     NSString* content = [command.arguments objectAtIndex:0];
+    NSString* fileName = [command.arguments objectAtIndex:1];
 
     if (content != nil && [content length] > 0) {
 		int base64MarkerPosition = [content rangeOfString:@";base64,"].location;
 		if (base64MarkerPosition != NSNotFound)
 			content = [content substringFromIndex:base64MarkerPosition + 8];
-		NSData* pdfContent = [NSData dataFromBase64String:content];
+		NSData* fileContent = [NSData dataFromBase64String:content];
 		
 		NSError *error = nil;
-		NSString* filePath = [DOCUMENTS_FOLDER stringByAppendingPathComponent:@"file.pdf"];
-		[pdfContent writeToFile:filePath options:NSDataWritingAtomic error:&error];
+		NSString* filePath = [DOCUMENTS_FOLDER stringByAppendingPathComponent:fileName];
+		[fileContent writeToFile:filePath options:NSDataWritingAtomic error:&error];
 		if (error)
 			NSLog(@"Write returned error: %@", [error localizedDescription]);
 		else {
